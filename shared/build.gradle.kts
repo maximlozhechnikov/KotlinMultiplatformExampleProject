@@ -39,7 +39,7 @@ kotlin {
             dependencies {
                 implementation("org.jetbrains.kotlin:kotlin-stdlib")
                 implementation("io.ktor:ktor-client-android:$ktor_version")
-            }
+            }}
         val androidTest by getting
         val iosX64Main by getting
         val iosArm64Main by getting
