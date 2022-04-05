@@ -24,13 +24,22 @@ kotlin {
     }
     
     sourceSets {
-        val commonMain by getting
+        val commonMain by getting {
+            dependencies {
+                implementation("org.jetbrains.kotlin:kotlin-stdlib-common")
+                implementation("io.ktor:ktor-client-core:$ktor_version")
+            }
+        }
         val commonTest by getting {
             dependencies {
                 implementation(kotlin("test"))
             }
         }
-        val androidMain by getting
+        val androidMain by getting {
+            dependencies {
+                implementation("org.jetbrains.kotlin:kotlin-stdlib")
+                implementation("io.ktor:ktor-client-android:$ktor_version")
+            }
         val androidTest by getting
         val iosX64Main by getting
         val iosArm64Main by getting
