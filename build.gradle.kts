@@ -1,4 +1,5 @@
 buildscript {
+
     repositories {
         gradlePluginPortal()
         google()
@@ -6,7 +7,7 @@ buildscript {
     }
     dependencies {
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.6.20")
-        classpath("com.android.tools.build:gradle:7.1.2")
+        classpath("com.android.tools.build:gradle:7.3.0-alpha07")
     }
 }
 
@@ -14,6 +15,9 @@ allprojects {
     repositories {
         google()
         mavenCentral()
+        maven("https://repo.maven.apache.org/maven2")
+        maven("https://repo1.maven.org/maven2/")
+        maven("https://dl.bintray.com/icerockdev/moko")
     }
 }
 

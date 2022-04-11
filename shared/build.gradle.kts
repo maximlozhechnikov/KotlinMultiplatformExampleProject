@@ -8,6 +8,8 @@ version = "1.0"
 
 kotlin {
     val ktor_version: String by project
+    val coroutine_version: String by project
+    val moko_mvvm_version: String by project
     android()
     iosX64()
     iosArm64()
@@ -20,14 +22,26 @@ kotlin {
         podfile = project.file("../iosApp/Podfile")
         framework {
             baseName = "shared"
+            version = "1.0"
         }
     }
-    
+
     sourceSets {
         val commonMain by getting {
             dependencies {
                 implementation("org.jetbrains.kotlin:kotlin-stdlib-common")
+
+                //KTor
                 implementation("io.ktor:ktor-client-core:$ktor_version")
+                implementation("io.ktor:ktor-client-json:$ktor_version")
+                implementation("io.ktor:ktor-client-logging:$ktor_version")
+                implementation("io.ktor:ktor-client-serialization:$ktor_version")
+
+                //koin DI
+                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutine_version")
+
+                //MVVM
+                implementation("dev.icerock.moko:mvvm:$moko_mvvm_version")
             }
         }
         val commonTest by getting {
@@ -39,7 +53,9 @@ kotlin {
             dependencies {
                 implementation("org.jetbrains.kotlin:kotlin-stdlib")
                 implementation("io.ktor:ktor-client-android:$ktor_version")
+                implementation("androidx.lifecycle:lifecycle-extensions:2.2.0")
             }
+        }
         val androidTest by getting
         val iosX64Main by getting
         val iosArm64Main by getting
@@ -49,6 +65,10 @@ kotlin {
             iosX64Main.dependsOn(this)
             iosArm64Main.dependsOn(this)
             iosSimulatorArm64Main.dependsOn(this)
+            dependencies {
+                //KTor
+                implementation("io.ktor:ktor-client-ios:$ktor_version")
+            }
         }
         val iosX64Test by getting
         val iosArm64Test by getting
@@ -61,6 +81,7 @@ kotlin {
         }
     }
 }
+
 
 android {
     compileSdk = 32

@@ -2,7 +2,6 @@ package com.example.exampleproject.android
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.example.exampleproject.Greeting
 import android.widget.TextView
 
 fun greet(): String {
