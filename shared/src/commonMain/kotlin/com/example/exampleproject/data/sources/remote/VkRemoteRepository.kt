@@ -21,7 +21,6 @@ class VkRemoteRepository(private val json: Json, token: String?): VkRepository, 
 
     @ExperimentalSerializationApi
     override suspend fun getCurrentUserData(): VkUser? {
-        println(vkApi?.get("photos.getAll", paramsOf("owner_id" to 147909771, "count" to 1, "photo_sizes" to 1)))
         return vkApi?.get("account.getProfileInfo")?.let {
             json.decodeFromJsonElement(
                 VkResponseTypedSerializer(VkUserBody.serializer()),
