@@ -1,6 +1,7 @@
 plugins {
     kotlin("multiplatform")
     kotlin("native.cocoapods")
+    kotlin("plugin.serialization") version("1.6.10")
     id("com.android.library")
 }
 
@@ -10,6 +11,7 @@ kotlin {
     val ktor_version: String by project
     val coroutine_version: String by project
     val moko_mvvm_version: String by project
+    val vk_sdk_version: String by project
     android()
     iosX64()
     iosArm64()
@@ -29,19 +31,27 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                implementation("org.jetbrains.kotlin:kotlin-stdlib-common")
-
+                implementation("org.jetbrains.kotlin:kotlin-stdlib")
+                implementation("org.jetbrains.kotlin:kotlin-reflect:1.6.20")
                 //KTor
                 implementation("io.ktor:ktor-client-core:$ktor_version")
                 implementation("io.ktor:ktor-client-json:$ktor_version")
+                implementation("io.ktor:ktor-client-cio:$ktor_version")
                 implementation("io.ktor:ktor-client-logging:$ktor_version")
                 implementation("io.ktor:ktor-client-serialization:$ktor_version")
-
-                //koin DI
                 implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutine_version")
 
                 //MVVM
-                implementation("dev.icerock.moko:mvvm:$moko_mvvm_version")
+                implementation("dev.icerock.moko:mvvm-core:$moko_mvvm_version")
+                implementation("dev.icerock.moko:mvvm-livedata:$moko_mvvm_version")
+                implementation("dev.icerock.moko:mvvm-state:$moko_mvvm_version")
+                implementation("dev.icerock.moko:mvvm-livedata-resources:$moko_mvvm_version")
+
+                //vk-kmp_sdk
+                implementation("com.petersamokhin.vksdk:core:$vk_sdk_version")
+                implementation("com.petersamokhin.vksdk:http-client-common-ktor:$vk_sdk_version")
+
+                implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.3.2")
             }
         }
         val commonTest by getting {
@@ -89,5 +99,10 @@ android {
     defaultConfig {
         minSdk = 21
         targetSdk = 32
+    }
+
+    compileOptions {
+        sourceCompatibility(JavaVersion.VERSION_11)
+        targetCompatibility(JavaVersion.VERSION_11)
     }
 }

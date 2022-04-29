@@ -3,16 +3,22 @@
     package="com.example.exampleproject.android">
 
     <application
+        android:name=".ExampleProjectApplication"
         android:allowBackup="false"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".MainActivity"
+            android:name=".activities.LaunchActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".activities.WebPageActivity" />
+
+        <activity android:name=".activities.MainActivity" />
+
     </application>
 </manifest> 
