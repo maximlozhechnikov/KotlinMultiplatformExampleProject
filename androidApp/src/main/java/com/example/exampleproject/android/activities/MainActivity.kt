@@ -1,5 +1,6 @@
 package com.example.exampleproject.android.activities
 
+import android.content.Intent
 import android.widget.TextView
 import com.example.exampleproject.android.R
 import com.example.exampleproject.app.ui.presenters.MainPresenter
@@ -16,7 +17,8 @@ class MainActivity: BaseActivity(R.layout.activity_main), MainView {
         lastNameTextView.text = user.lastName
     }
 
-    override fun showWebViewScreen() {
-        TODO("Not yet implemented")
+    override fun showLoginScreen() {
+        startActivity(WebPageActivity.createIntent(this,
+            "https://oauth.vk.com/authorize?client_id=8135391&display=page&response_type=token"))
     }
 }
