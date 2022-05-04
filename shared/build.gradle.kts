@@ -39,7 +39,9 @@ kotlin {
                 implementation("io.ktor:ktor-client-cio:$ktor_version")
                 implementation("io.ktor:ktor-client-logging:$ktor_version")
                 implementation("io.ktor:ktor-client-serialization:$ktor_version")
-                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutine_version")
+                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutine_version") {
+                    isForce = true
+                }
 
                 //MVVM
                 implementation("dev.icerock.moko:mvvm-core:$moko_mvvm_version")
