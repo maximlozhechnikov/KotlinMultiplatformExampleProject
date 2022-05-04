@@ -16,6 +16,13 @@ pluginManagement {
                 }
             }
         }
+        eachPlugin {
+            when(requested.id.id) {
+                "kotlinx-coroutines-core" -> {
+                    useModule("org.jetbrains.kotlinx:kotlinx-coroutines-core:$1.6.0-native-mt")
+                }
+            }
+        }
     }
 }
 
