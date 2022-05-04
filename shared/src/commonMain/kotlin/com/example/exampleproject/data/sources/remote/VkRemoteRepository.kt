@@ -7,25 +7,32 @@ import com.example.exampleproject.domain.entities.VkUser
 import com.example.exampleproject.domain.repositories.VkRepository
 import com.example.exampleproject.domain.storages.ProfileStorage
 import com.petersamokhin.vksdk.core.client.VkApiClient
+import com.petersamokhin.vksdk.core.error.VkResponseException
 import com.petersamokhin.vksdk.core.http.paramsOf
+import com.petersamokhin.vksdk.core.model.VkResponseError
 import com.petersamokhin.vksdk.core.model.VkResponseTypedSerializer
 import com.petersamokhin.vksdk.core.model.VkSettings
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.builtins.ListSerializer
 import kotlinx.serialization.json.Json
 
-class VkRemoteRepository(private val json: Json, token: String?): VkRepository, ProfileStorage.TokenUpdateListener {
+class VkRemoteRepository(private val json: Json, token: String?, private val profileStorage: ProfileStorage): VkRepository, ProfileStorage.TokenUpdateListener {
 
     private val vkHttpClient = VkHttpClient(dispatcher)
     private var vkApi: VkApiClient? = token?.let(::createVkApi)
 
+    init {
+        profileStorage.setupTokenUpdateListener(this)
+    }
     @ExperimentalSerializationApi
     override suspend fun getCurrentUserData(): VkUser? {
         return vkApi?.get("account.getProfileInfo")?.let {
-            json.decodeFromJsonElement(
+            val response = json.decodeFromJsonElement(
                 VkResponseTypedSerializer(VkUserBody.serializer()),
                 it
-            ).response
+            )
+            response.error?.let { throw VkResponseException() }
+            response.response
         }
     }
 

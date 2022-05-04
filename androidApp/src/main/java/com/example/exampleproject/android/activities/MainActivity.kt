@@ -15,4 +15,8 @@ class MainActivity: BaseActivity(R.layout.activity_main), MainView {
         firstNameTextView.text = user.firstName
         lastNameTextView.text = user.lastName
     }
+
+    override fun showWebViewScreen() {
+        TODO("Not yet implemented")
+    }
 }

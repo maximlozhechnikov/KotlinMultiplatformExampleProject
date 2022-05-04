@@ -6,4 +6,5 @@ interface MainView: BaseView {
 
     fun setUserInfo(user: VkUser)
 
+    fun showWebViewScreen()
 }
