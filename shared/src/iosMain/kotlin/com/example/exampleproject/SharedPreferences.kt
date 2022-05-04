@@ -1,25 +1,28 @@
 package com.example.exampleproject
 
+import platform.Foundation.NSUserDefaults
+import platform.darwin.NSObject
+
 actual typealias SharedPrefs = NSObject
 
 actual fun SharedPrefs.getInt(key: String): Int = NSUserDefaults
-    .standartUserDefaults
+    .standardUserDefaults
     .integerForKey(key)
     .toInt()
 
 actual fun SharedPrefs.setInt(key:String, value: Int) {
     NSUserDefaults
-        .standartUserDefaults
+        .standardUserDefaults
         .setInteger(value.toLong(), key)
 }
 
 actual fun SharedPrefs.getString(key: String): String =
     NSUserDefaults
-        .standartUserDefaults
-        .StringForKey(key)
+        .standardUserDefaults
+        .stringForKey(key) ?: ""
 
 actual fun SharedPrefs.setString(key: String, value: String) {
     NSUserDefaults
-        .standartUserDefaults
+        .standardUserDefaults
         .setString(value, key)
 }
