@@ -1,27 +1,23 @@
 package com.example.exampleproject.android.activities
 
-import android.content.Intent
 import android.view.View
 import androidx.annotation.IdRes
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
-import com.example.exampleproject.Screen
 import com.example.exampleproject.android.ExampleProjectApplication
+import com.example.exampleproject.android.extensions.createPresenter
 import com.example.exampleproject.app.ui.presenters.BasePresenter
 import com.example.exampleproject.app.ui.views.BaseView
-import com.example.exampleproject.domain.Injector
 
-abstract class BaseActivity(@LayoutRes layoutId: Int) : AppCompatActivity(layoutId), BaseView, Screen {
+abstract class BaseActivity(@LayoutRes layoutId: Int) : AppCompatActivity(layoutId), BaseView {
 
     protected abstract val presenter: BasePresenter<out BaseView>
 
     protected inline fun <reified P : BasePresenter<V>, reified V : BaseView> providePresenter(view: V): P =
-        BasePresenter.createPresenter(
+        createPresenter(
             P::class.java,
             view,
-            ExampleProjectApplication.dataInjector!!,
-            V::class.java,
-            Injector::class.java
+            ExampleProjectApplication.dataInjector!!
         )
 
     @Suppress("UNCHECKED_CAST")

@@ -13,14 +13,4 @@ abstract class BasePresenter<View : BaseView>(protected val view: View, injector
 
     override val coroutineContext: CoroutineContext = Dispatchers.Main
 
-    companion object {
-        inline fun <P : BasePresenter<V>, V : BaseView> createPresenter(
-            clazz: Class<P>,
-            view: V,
-            injector: Injector,
-            viewClass: Class<V>,
-            injectorClass: Class<Injector>
-        ): P = clazz.getDeclaredConstructor(viewClass, injectorClass).newInstance(view, injector)
-    }
-
 }
