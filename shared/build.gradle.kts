@@ -49,11 +49,12 @@ kotlin {
                 implementation("dev.icerock.moko:mvvm-state:$moko_mvvm_version")
                 implementation("dev.icerock.moko:mvvm-livedata-resources:$moko_mvvm_version")
 
-                //vk-kmp_sdk
-                implementation("com.petersamokhin.vksdk:core:$vk_sdk_version")
-                implementation("com.petersamokhin.vksdk:http-client-common-ktor:$vk_sdk_version")
+//                //vk-kmp_sdk
+//                implementation("com.petersamokhin.vksdk:core:$vk_sdk_version")
+//                implementation("com.petersamokhin.vksdk:http-client-common-ktor:$vk_sdk_version")
 
                 implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.3.2")
+                implementation("com.omega:rocket.chat.kmm:0.0.1")
             }
         }
         val commonTest by getting {
@@ -96,11 +97,11 @@ kotlin {
 
 
 android {
-    compileSdk = 32
+    compileSdk = 31
     sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
     defaultConfig {
         minSdk = 21
-        targetSdk = 32
+        targetSdk = 31
     }
 
     compileOptions {

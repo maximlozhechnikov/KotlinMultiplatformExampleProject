@@ -3,12 +3,16 @@ plugins {
     kotlin("android")
 }
 
+repositories {
+    mavenLocal()
+}
+
 android {
-    compileSdk = 32
+    compileSdk = 31
     defaultConfig {
         applicationId = "com.example.exampleproject.android"
         minSdk = 21
-        targetSdk = 32
+        targetSdk = 31
         versionCode = 1
         versionName = "1.0"
     }
@@ -26,4 +30,5 @@ dependencies {
     implementation("androidx.constraintlayout:constraintlayout:2.1.0")
     implementation("com.github.Omega-R.OmegaBase:core:1.4.3")
     implementation("com.airbnb.android:lottie:5.0.3")
+    implementation("com.omega:rocket.chat.kmm:0.0.1")
 }

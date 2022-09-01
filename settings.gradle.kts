@@ -1,5 +1,6 @@
 pluginManagement {
     repositories {
+        mavenLocal()
         google()
         gradlePluginPortal()
         mavenCentral()
@@ -14,10 +15,6 @@ pluginManagement {
                 "kotlinx-serialization"->{
                     useModule("org.jetbrains.kotlinx:kotlinx-gradle-serialization-plugin:${requested.version}")
                 }
-            }
-        }
-        eachPlugin {
-            when(requested.id.id) {
                 "kotlinx-coroutines-core" -> {
                     useModule("org.jetbrains.kotlinx:kotlinx-coroutines-core:$1.6.0-native-mt")
                 }

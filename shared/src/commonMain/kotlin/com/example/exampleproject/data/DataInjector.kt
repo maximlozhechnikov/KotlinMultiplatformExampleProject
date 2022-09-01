@@ -20,9 +20,7 @@ class DataInjector(private val context: ContextProvider): Injector {
 
     override val profileStorage: ProfileStorage = DataProfileStorage(context as? SharedPrefs)
 
-
     override val vkRepository: VkRepository = VkRemoteRepository(json, profileStorage.token, profileStorage)
-
 
 
 }
